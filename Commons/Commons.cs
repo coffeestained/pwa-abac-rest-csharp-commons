@@ -2,7 +2,7 @@
 
 namespace Main;
 
-public class Program : IProgram
+public class Commons : ICommons
 {
     private WebApplication? _app;
     public WebApplication? App
@@ -31,13 +31,14 @@ public class Program : IProgram
         set => Logging = value;
     }
 
-    public Program(Configuration configuration) 
+    public Commons(Configuration configuration) 
     {
         // App
         this.App = WebApplication.Create();
 
         // Bootstrap Rest & Socket Files
         string csFiles = "*.cs";
+        Console.Write(Environment.ProcessPath);
         string restFolder = Path.GetDirectoryName(Environment.ProcessPath) + @"\rest\";
         string socketFolder = Path.GetDirectoryName(Environment.ProcessPath) + @"\socket\";
         this.RestFiles = Directory.GetFiles(restFolder, csFiles);
@@ -57,11 +58,11 @@ public class Program : IProgram
     {
         Console.Write(args);
         var configuration = new Configuration("mongodb://192.168.50.208:27017/", ExtendedConfigOptions.CONSOLE);
-        new Program(configuration);
+        new Commons(configuration);
     }
 }
 
-public interface IProgram
+public interface ICommons
 {
     WebApplication? App { get; set; }
 
