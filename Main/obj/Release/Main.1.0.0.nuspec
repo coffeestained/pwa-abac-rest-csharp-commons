@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Main</id>
+    <version>1.0.0</version>
+    <authors>Main</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="6fd8d541858ec0a0bc860fb36b8c2f6f4cec41e7" />
+    <dependencies>
+      <group targetFramework="net8.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="/home/ubuntu/projects/pwa-csharp-commons/Main/bin/Release/net8.0/Main.runtimeconfig.json" target="lib/net8.0/Main.runtimeconfig.json" />
+    <file src="/home/ubuntu/projects/pwa-csharp-commons/Main/bin/Release/net8.0/Main.dll" target="lib/net8.0/Main.dll" />
+  </files>
+</package>
