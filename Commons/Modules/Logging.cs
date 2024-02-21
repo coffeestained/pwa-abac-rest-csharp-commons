@@ -1,4 +1,4 @@
-namespace Main.Modules;
+namespace Common.Modules;
 
 public class Logging : ILogging {
     private ExtendedConfigOptions? _extendedConfig;

@@ -1,6 +1,6 @@
-using Main.Modules;
+using Common.Modules;
 
-namespace Main;
+namespace Common;
 
 public class Configuration : IConfiguration
 {
