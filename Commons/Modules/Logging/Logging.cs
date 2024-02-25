@@ -1,6 +1,6 @@
 namespace Common.Modules;
 
-public class Logging : ILogging {
+public class CommonLogging : ICommonLogging {
     private ExtendedConfigOptions? _extendedConfig;
     public ExtendedConfigOptions? ExtendedConfig
     {
@@ -8,7 +8,7 @@ public class Logging : ILogging {
         set => _extendedConfig = value;
     }
 
-    public Logging(ExtendedConfigOptions config = ExtendedConfigOptions.CONSOLE) {
+    public CommonLogging(ExtendedConfigOptions config = ExtendedConfigOptions.CONSOLE) {
         this.ExtendedConfig = config;
     }
 
@@ -24,10 +24,16 @@ public class Logging : ILogging {
     }
 }
 
-public interface ILogging {
+public interface ICommonLogging {
     ExtendedConfigOptions? ExtendedConfig { get; set; }
 
     void Log(string level, string message);
 }
 
+// Configures cloud provider log instances.
+// Console will always be enabled and default.
 public enum ExtendedConfigOptions { CONSOLE, AWS, AZURE, GCP }
+
+// The highest level of logging available.
+// Defaults to highest (DEBUG).
+public enum ExtendedLoggingLevelOptions { INFO, ERROR, TRACE, DEBUG }
