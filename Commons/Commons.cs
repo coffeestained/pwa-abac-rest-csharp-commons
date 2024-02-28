@@ -1,5 +1,4 @@
 ﻿using Common.Modules;
-using Common.Utils;
 
 namespace Common;
 
@@ -10,6 +9,13 @@ public class Commons : ICommons
     {
         get => _app;
         set => _app = value;
+    }
+
+    private MongoDBContext _mongo = null!;
+    public MongoDBContext Mongo
+    {
+        get => _mongo;
+        set => _mongo = value;
     }
 
     private Configuration _configuration = null!;
@@ -28,9 +34,14 @@ public class Commons : ICommons
 
     public Commons(Configuration configuration) 
     {
+        // Set Config
         this.Configuration = configuration;
-        this.CommonLogging = new CommonLogging(configuration.ExtendedLogging);
+        
+        // Init Logging
+        this.CommonLogging = CommonLogging.GetInstance(configuration.ExtendedLogging);
         this.CommonLogging.Log("INFO", "Initializing commons.");
+        
+        // Bootstrap
         this.Bootstrap(configuration);
     }
 
@@ -38,6 +49,11 @@ public class Commons : ICommons
         // App
         this.App = WebApplication.Create();
 
+        // Bootstrap MongoDB
+        Console.Write(configuration.ConnectionString);
+        this.Mongo = MongoDBContext.GetInstance(configuration.ConnectionString);
+
+        Console.Write(this.Mongo.IsConnected());
 
         // Bootstrap Rest & Socket Files
         try 
@@ -72,8 +88,6 @@ public class Commons : ICommons
             this.CommonLogging.Log("DEBUG", e.Message);
         }
 
-        // Bootstrap MongoDB
-
         // Bootstrap ABAC
 
     }
@@ -86,6 +100,8 @@ public class Commons : ICommons
 public interface ICommons
 {
     protected WebApplication? App { get; set; }
+
+    protected MongoDBContext? Mongo { get; set; }
 
     public Configuration Configuration { get; set; }
 

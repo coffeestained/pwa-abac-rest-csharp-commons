@@ -1,4 +1,4 @@
-namespace Commons.Modules;
+namespace Common.Modules;
 
 class Rest : IRest {
     private Route[] _routes;
@@ -15,5 +15,5 @@ class Rest : IRest {
 }
 
 interface IRest {
-    private Route[] Routes { get; set; }
+    Route[] Routes { get; set; }
 }

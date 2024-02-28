@@ -1,4 +1,4 @@
-using static Common.Globals.Utils;
+using Common.Modules.ABAC;
 
 namespace Common.Modules;
 
@@ -18,16 +18,16 @@ public class Route : IRoute {
         set => _endpoint = value;
     }
 
-    private Dictionary<string, Validator> _bodyValidator { get; set; }
-    public Dictionary<string, Validator> BodyValidator
+    private Dictionary<string, object> _bodyValidator { get; set; }
+    public Dictionary<string, object> BodyValidator
     {
         get => _bodyValidator;
         set => _bodyValidator = value;
     }
 
 
-    private Dictionary<string, Validator> _queryValidator { get; set; }
-    public Dictionary<string, Validator> QueryValidator
+    private Dictionary<string, object> _queryValidator { get; set; }
+    public Dictionary<string, object> QueryValidator
     {
         get => _queryValidator;
         set => _queryValidator = value;
@@ -41,6 +41,12 @@ public class Route : IRoute {
         set => _handler = value;
     }
 
+    private List<Common.Modules.ABAC.Attribute> _attributes { get; set; }
+    public List<Common.Modules.ABAC.Attribute> Attributes
+    {
+        get => _attributes;
+        set => _attributes = value;
+    }
 
     public Route(object config) {
 
@@ -48,13 +54,14 @@ public class Route : IRoute {
 }
 
 interface IRoute {
-    private Methods Method { get; set; }
-    private string Endpoint { get; set; }
-    private Dictionary<string, Validator>? BodyValidator { get; set; }
-    private Dictionary<string, Validator>? QueryValidator { get; set; }
-    private Action<object, object> Handler { get; set; }
+    Methods Method { get; set; }
+    string Endpoint { get; set; }
+    Dictionary<string, object> BodyValidator { get; set; }
+    Dictionary<string, object> QueryValidator { get; set; }
+    Action<object, object> Handler { get; set; }
+    List<Common.Modules.ABAC.Attribute> Attributes { get; set; }
 }
 
-enum Methods {
+public enum Methods {
     GET, POST, PATCH, PUT, DELETE, OPTIONS
 }

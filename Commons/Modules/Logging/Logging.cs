@@ -8,8 +8,16 @@ public class CommonLogging : ICommonLogging {
         set => _extendedConfig = value;
     }
 
-    public CommonLogging(ExtendedConfigOptions config = ExtendedConfigOptions.CONSOLE) {
+    private CommonLogging(ExtendedConfigOptions? config = ExtendedConfigOptions.CONSOLE) {
         this.ExtendedConfig = config;
+    }
+
+    private static CommonLogging? _instance;
+
+    public static CommonLogging GetInstance(ExtendedConfigOptions? config = ExtendedConfigOptions.CONSOLE)
+    {
+        _instance ??= new CommonLogging(config);
+        return _instance;
     }
 
     public void Log(string level, string message) {
