@@ -50,10 +50,7 @@ public class Commons : ICommons
         this.App = WebApplication.Create();
 
         // Bootstrap MongoDB
-        Console.Write(configuration.ConnectionString);
-        this.Mongo = MongoDBContext.GetInstance(configuration.ConnectionString);
-
-        Console.Write(this.Mongo.IsConnected());
+        this.Mongo = MongoDBContext.GetInstance(configuration.ConnectionString)!;    
 
         // Bootstrap Rest & Socket Files
         try 

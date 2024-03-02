@@ -12,7 +12,7 @@ public class CommonLogging : ICommonLogging {
         this.ExtendedConfig = config;
     }
 
-    private static CommonLogging? _instance;
+    private static CommonLogging? _instance = null;
 
     public static CommonLogging GetInstance(ExtendedConfigOptions? config = ExtendedConfigOptions.CONSOLE)
     {

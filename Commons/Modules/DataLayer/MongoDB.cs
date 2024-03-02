@@ -41,9 +41,9 @@ public class MongoDBContext : DbContext
 
     private static MongoDBContext? _instance;
 
-    public static MongoDBContext GetInstance(string uri)
+    public static MongoDBContext? GetInstance(string? uri)
     {
-        _instance ??= new MongoDBContext(uri);
+        _instance ??= uri != null ? new MongoDBContext(uri) : null;
         return _instance;
     }
 

@@ -41,15 +41,22 @@ public class Route : IRoute {
         set => _handler = value;
     }
 
-    private List<Common.Modules.ABAC.Attribute> _attributes { get; set; }
-    public List<Common.Modules.ABAC.Attribute> Attributes
+    private bool _authenticated { get; set; }
+    public bool Authenticated
+    {
+        get => _authenticated;
+        set => _authenticated = value;
+    }
+
+    private List<ABAC.Attribute> _attributes { get; set; }
+    public List<ABAC.Attribute> Attributes
     {
         get => _attributes;
         set => _attributes = value;
     }
 
     public Route(object config) {
-
+        // Need to create configuration for routes
     }
 }
 
@@ -59,7 +66,8 @@ interface IRoute {
     Dictionary<string, object> BodyValidator { get; set; }
     Dictionary<string, object> QueryValidator { get; set; }
     Action<object, object> Handler { get; set; }
-    List<Common.Modules.ABAC.Attribute> Attributes { get; set; }
+    List<ABAC.Attribute> Attributes { get; set; }
+    bool Authenticated { get; set; }
 }
 
 public enum Methods {
